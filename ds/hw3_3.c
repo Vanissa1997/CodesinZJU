@@ -107,7 +107,7 @@ ElementType Pop( Deque D )
         return tmp;
     }
     D->Front->Next=D->Front->Next->Next;
-    D->Front->Next->Next->Last=D->Front;
+    D->Front->Next->Last=D->Front;
     free(k);
     return tmp;
 }
@@ -120,10 +120,9 @@ int Inject( ElementType X, Deque D )
         k->Next=NULL;
     if(D->Front==D->Rear)//empty list
     {
-        D->Rear=k;
         D->Front->Next=k;
         k->Last=D->Front;
-        k->Next=NULL;
+        D->Rear=k;
         return 1;
     }else
     {
@@ -141,20 +140,10 @@ ElementType Eject( Deque D )
     PtrToNode k;
     k=D->Rear;
     ElementType tmp=k->Element;
-    if(D->Front->Next==D->Rear)//only one node
-    {
-        D->Rear=D->Front;
-        D->Front->Next=NULL;
-        free(k);
-        return tmp;
-    }else
-    {
-        D->Rear=D->Rear->Last;
-        D->Rear->Next=NULL;
-        free(k);
-        return tmp;
-    }
-    
+    D->Rear=D->Rear->Last;
+    D->Rear->Next=NULL;
+    free(k);
+    return tmp;
 }
 
 void PrintDeque( Deque D )
