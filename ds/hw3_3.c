@@ -77,7 +77,7 @@ int Push( ElementType X, Deque D )
     if(D->Front==D->Rear)//empty list
     {
         D->Rear=k;
-        D->Front->Next=
+        D->Front->Next=k;
         k->Last=D->Front;
         k->Next=NULL;
         return 1;
