@@ -2,24 +2,24 @@
 #include <string.h>
 #include<stdlib.h>
 
-typedef struct Node* PNode;
+typedef struct Node* BinTree;
 struct Node
 {
     int Element;
-    PNode Left;
-    PNode Right;
+    BinTree Left;
+    BinTree Right;
 };
 int a[100],b[100],stack[100];
 
-PNode buildtree(int prel,int prer,int inl,int inr);
-void postorder(PNode T);
+BinTree buildtree(int prel,int prer,int inl,int inr);
+void postorder(BinTree T);
 
 int main()
 {
     int N,cpush=0,cpop=0,i,x;
     int top1=-1,top2=-1,top=-1;
     char s[10];
-    PNode Tree;
+    BinTree Tree;
 
     scanf("%d",&N);
     while(cpop<N)
@@ -54,9 +54,9 @@ int main()
     printf("\n");
 }
 
-PNode buildtree(int prel,int prer,int inl,int inr)
+BinTree buildtree(int prel,int prer,int inl,int inr)
 {
-    PNode T;
+    BinTree T;
     int i,t;
     
     if(prel>prer)
@@ -64,11 +64,11 @@ PNode buildtree(int prel,int prer,int inl,int inr)
         T=NULL;
         return T;
     }
-    T=(PNode)malloc(sizeof(struct Node));
+    T=(BinTree)malloc(sizeof(struct Node));
     T->Element=a[prel];
     if(prel==prer)
     {
-        //T=(PNode)malloc(sizeof(struct Node));
+        //T=(BinTree)malloc(sizeof(struct Node));
         T->Left=T->Right=NULL;
         return T;
     }
@@ -91,7 +91,7 @@ PNode buildtree(int prel,int prer,int inl,int inr)
     return T;
 }
 
-void postorder(PNode T)
+void postorder(BinTree T)
 {
     if(T!=NULL)
     {

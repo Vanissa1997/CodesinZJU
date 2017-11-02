@@ -1,0 +1,211 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Guass</title><meta name="generator" content="MATLAB 9.0"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-10-06"><meta name="DC.source" content="Guass.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><pre class="codeinput"><span class="keyword">function</span> Guass( A,b,n,E )
+<span class="comment">% A&#26159;&#31995;&#25968;&#30697;&#38453;&#65292;n&#26159;&#38454;&#25968;</span>
+<span class="comment">% E&#26159;&#19968;&#20010;&#20154;&#20026;&#35774;&#23450;&#30340;&#36739;&#23567;&#30340;&#25968;&#65292;&#24403;&#20803;&#32032;&#23567;&#20110;E&#26102;&#65292;&#20415;&#35748;&#20026;&#23427;&#36275;&#22815;&#23567;&#65292;&#31561;&#20110;0</span>
+<span class="comment">%&#27714;&#35299;&#26041;&#31243;Ax=b</span>
+
+lengthb=length(b);
+[m,n]=size(A);
+<span class="comment">%&#21028;&#26029;A&#26159;&#21542;&#20026;&#26041;&#38453;</span>
+<span class="keyword">if</span> m~=n
+    disp(<span class="string">'A&#19981;&#26159;&#26041;&#38453;'</span>);
+    <span class="keyword">return</span>;
+<span class="keyword">end</span>
+<span class="comment">%&#21028;&#26029;A&#65292;b&#26159;&#21542;&#31526;&#21512;&#36755;&#20837;&#26465;&#20214;</span>
+<span class="keyword">if</span> m~=lengthb
+    disp(<span class="string">'b&#30340;&#38271;&#24230;&#19981;&#31561;&#20110;A&#30340;&#38454;&#25968;'</span>);
+    <span class="keyword">return</span>;
+<span class="keyword">end</span>
+
+<span class="keyword">for</span> k=1:n-1
+    max=0;<span class="comment">%&#36873;&#20027;&#20803;</span>
+    <span class="keyword">for</span> i=k:n
+        <span class="keyword">if</span> abs(A(i,k))&gt;max
+            max=abs(A(i,k));
+            row=i;
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+    <span class="keyword">if</span> max&lt;E
+        disp(<span class="string">'det(A)=0'</span>);
+        <span class="keyword">return</span>;
+    <span class="keyword">end</span>
+    <span class="keyword">if</span> row&gt;k
+        <span class="comment">%&#20132;&#25442;&#34892;</span>
+        <span class="keyword">for</span> j=k:n
+            temp1=A(row,j);
+            A(row,j)=A(k,j);
+            A(k,j)=temp1;
+        <span class="keyword">end</span>
+        temp2=b(row);
+        b(row)=b(k);
+        b(k)=temp2;
+    <span class="keyword">end</span>
+    <span class="comment">%&#28040;&#20803;&#35745;&#31639;</span>
+    <span class="keyword">for</span> i=k+1:n
+        A(i,k)=A(i,k)/A(k,k);
+        <span class="keyword">for</span> j=k+1:n
+            A(i,j)=A(i,j)-A(i,k)*A(k,j);
+        <span class="keyword">end</span>
+        b(i)=b(i)-A(i,k)*b(k);
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+<span class="keyword">if</span> abs(A(n,n))&lt;E
+    disp(<span class="string">'det(A)=0'</span>);
+    <span class="keyword">return</span>;
+<span class="keyword">else</span>
+    <span class="comment">%&#22238;&#20195;&#27714;&#35299;</span>
+    b(n)=b(n)/A(n,n);
+    <span class="keyword">for</span> c=n-1:-1:1
+        <span class="keyword">for</span> j=c+1:n
+            b(c)=b(c)-A(c,j)*b(j);
+        <span class="keyword">end</span>
+        b(c)=b(c)/A(c,c);
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+vpa(b);
+digits(5);
+disp(b);
+<span class="keyword">end</span>
+</pre><pre class="codeoutput error">&#36755;&#20837;&#21442;&#25968;&#30340;&#25968;&#30446;&#19981;&#36275;&#12290;
+
+&#20986;&#38169; Guass (line 6)
+lengthb=length(b);
+</pre><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2016a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+function Guass( A,b,n,E )
+% A是系数矩阵，n是阶数
+% E是一个人为设定的较小的数，当元素小于E时，便认为它足够小，等于0
+%求解方程Ax=b
+
+lengthb=length(b);
+[m,n]=size(A);
+%判断A是否为方阵
+if m~=n
+    disp('A不是方阵');
+    return;
+end
+%判断A，b是否符合输入条件
+if m~=lengthb
+    disp('b的长度不等于A的阶数');
+    return;
+end
+
+for k=1:n-1
+    max=0;%选主元
+    for i=k:n
+        if abs(A(i,k))>max
+            max=abs(A(i,k));
+            row=i;
+        end
+    end
+    if max<E
+        disp('det(A)=0');
+        return;
+    end
+    if row>k
+        %交换行
+        for j=k:n
+            temp1=A(row,j);
+            A(row,j)=A(k,j);
+            A(k,j)=temp1;
+        end
+        temp2=b(row);
+        b(row)=b(k); 
+        b(k)=temp2;
+    end
+    %消元计算
+    for i=k+1:n
+        A(i,k)=A(i,k)/A(k,k);
+        for j=k+1:n
+            A(i,j)=A(i,j)-A(i,k)*A(k,j);
+        end
+        b(i)=b(i)-A(i,k)*b(k);
+    end     
+end
+if abs(A(n,n))<E
+    disp('det(A)=0');
+    return;
+else
+    %回代求解
+    b(n)=b(n)/A(n,n);
+    for c=n-1:-1:1
+        for j=c+1:n
+            b(c)=b(c)-A(c,j)*b(j);   
+        end
+        b(c)=b(c)/A(c,c);
+    end
+end
+vpa(b);
+digits(5);
+disp(b);
+end
+
+##### SOURCE END #####
+--></body></html>

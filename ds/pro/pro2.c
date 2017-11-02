@@ -46,33 +46,17 @@ PNode create_tree(int a[],int l,int r)      //create a tree using the number fro
     root=(PNode)malloc(sizeof(struct Node));//create a root which stores a[l]
     if(a[l]>0)
     {
-        root->key=a[l];                     
+        root->key=a[l];                     //if the number is positive, then the node is black
         root->color=BLACK;
     }
     else if(a[l]<0)
     {
-        root->key=-a[l];                    
+        root->key=-a[l];                    //if the number is negative, then the node is red
         root->color=RED;
     }
 
     if(l>r) return NULL;                    //the left subtree or the right subtree is empty
-    if(l==r)                                //the left subtree or the right subtree has only a node
-    {
-        root=(PNode)malloc(sizeof(struct Node));
-        if(a[l]>0)
-        {
-            root->key=a[l];            
-            root->color=BLACK;              //if the number is positive, then the node is black
-            root->Left=root->Right=NULL;
-        }
-        else if(a[l]<0)
-        {
-            root->key=-a[l];
-            root->color=RED;                //if the number is negative, then the node is red
-            root->Left=root->Right=NULL;
-        }
-        return root;
-    }
+    
     for(i=l+1;i<=r;i++)                     //look for the subscript "t" which guarantees a[t]>a[l]
     {
         if(abs(a[i])>abs(a[l]))
